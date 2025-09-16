@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evaluación 1 — Presentación Visual (HTML)</title>
+  <meta name="description" content="Presentación visual del informe 'Evaluación 1' — Diseño de Software: BD de inventario, interfaz CRUD en ASP.NET, y control de versiones con Git/GitHub." />
+  <style>
+    :root{
+      --azul:#00094A; /* preferencia del usuario */
+      --amarillo:#FFD500; /* preferencia del usuario */
+      --fondo:#0e1034;
+      --card:#121542;
+      --texto:#e9ecff;
+      --muted:#b9c2ff;
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --accent:#7c3aed;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:linear-gradient(180deg,var(--fondo),#06071e 60%);color:var(--texto);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+    a{color:var(--amarillo);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header.hero{position:relative;overflow:hidden;padding:64px 20px 40px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .wrap{max-width:1200px;margin:0 auto}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--muted);font-size:12px;letter-spacing:.4px;text-transform:uppercase}
+    .title{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+    h1{font-size: clamp(28px, 6vw, 56px);margin:12px 0 8px;line-height:1.05}
+    .subtitle{font-size:clamp(14px,2vw,18px);color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media (min-width:900px){
+      .grid{grid-template-columns:280px 1fr}
+    }
+    nav.toc{position:sticky;top:16px;align-self:start;background:linear-gradient(180deg,#0b0e37,#0a0d33);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.08)}
+    nav.toc h3{margin:0 0 10px;font-size:14px;color:var(--muted);letter-spacing:.6px;text-transform:uppercase}
+    nav.toc a{display:block;padding:8px 10px;border-radius:10px;color:#cfd5ff}
+    nav.toc a:hover{background:rgba(255,255,255,.06)}
+    section{background:linear-gradient(180deg,var(--card),#0f1342);padding:22px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.08)}
+    section h2{margin:0 0 8px;font-size:clamp(20px,3.5vw,28px)}
+    section h3{margin:16px 0 6px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,213,0,.15);color:var(--amarillo);font-weight:600;font-size:12px}
+    .cards{display:grid;grid-template-columns:1fr;gap:12px}
+    @media (min-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}}
+    .card{background:rgba(255,255,255,.03);padding:16px;border-radius:14px;border:1px dashed rgba(255,255,255,.12)}
+    .meta{display:flex;gap:10px;flex-wrap:wrap}
+    .meta span{background:rgba(255,255,255,.06);padding:6px 10px;border-radius:999px;font-size:12px;color:#c7ceff}
+    .timeline{position:relative;margin:8px 0 0;padding-left:24px}
+    .timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(var(--amarillo),transparent)}
+    .step{position:relative;margin:0 0 14px}
+    .step:before{content:"";position:absolute;left:-18px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--amarillo);box-shadow:0 0 0 4px rgba(255,213,0,.15)}
+    code, pre{background:rgba(0,0,0,.35);color:#e0eaff;border-radius:10px}
+    code{padding:2px 6px}
+    pre{padding:12px;overflow:auto}
+    .gallery{display:grid;grid-template-columns:1fr;gap:10px}
+    @media (min-width:900px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .figure{border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.025)}
+    .figcap{padding:10px 12px;color:#cfd5ff;font-size:13px;border-top:1px solid rgba(255,255,255,.08)}
+    .figimg{aspect-ratio:16/9;display:grid;place-items:center;color:#aab1ff}
+    .callout{border-left:4px solid var(--amarillo);padding:12px 14px;background:rgba(255,213,0,.09);border-radius:10px}
+    footer{color:#a9b2ff;text-align:center;padding:30px 0}
+    .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media (min-width:720px){.kpis{grid-template-columns:repeat(4,1fr)}}
+    .kpi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;text-align:center}
+    .kpi .n{font-size:22px;font-weight:800}
+    .repo{display:flex;flex-direction:column;gap:10px}
+    .small{font-size:13px;color:#cbd2ff}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:rgba(255,255,255,.06);padding:6px 10px;border-radius:999px}
+    .credits{display:flex;flex-wrap:wrap;gap:8px}
+    .credits .person{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:10px}
+
+    /* Botón flotante arriba */
+    .top{position:fixed;right:18px;bottom:18px;background:var(--amarillo);color:#111;padding:10px 12px;border:none;border-radius:999px;font-weight:700;box-shadow:var(--shadow);cursor:pointer}
+
+    /* Impresión */
+    @media print{
+      header.hero{box-shadow:none;border:none}
+      nav.toc{position:static}
+      .top{display:none}
+      a{color:#000}
+      body{background:white;color:#000}
+      section{background:white;border-color:#ddd;box-shadow:none}
+      .figure{page-break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="pill">Evaluación 1 · Diseño de Software · 2025</div>
+      <div class="title">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='%23FFD500'%3E%3Cpath d='M12 2l7 4v6c0 5-3 8-7 10C8 20 5 17 5 12V6l7-4zM7 7v5c0 3.5 2 6 5 7.5 3-1.5 5-4 5-7.5V7l-5-3-5 3z'/%3E%3C/svg%3E" alt="escudo" />
+        <div>
+          <h1>Inventario & CRUD · Proyecto integral</h1>
+          <p class="subtitle">Creación de BD en SQL Server, interfaz ASP.NET y control de versiones con Git/GitHub.</p>
+          <div class="meta">
+            <span>Equipo de Desarrollo: <strong>“Los Orcalitos”</strong></span>
+            <span>Asignatura: <strong>Diseño de Software</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding:24px 20px 60px">
+    <div class="grid">
+      <!-- Índice -->
+      <nav class="toc" aria-label="Índice de secciones">
+        <h3>Índice</h3>
+        <a href="#presentacion">Presentación</a>
+        <a href="#desarrollo">1. Desarrollo</a>
+        <a href="#bd">1.1 Base de datos</a>
+        <a href="#interfaz">1.2 Interfaz</a>
+        <a href="#repo">1.3 Repositorio</a>
+        <a href="#conclusiones">2. Conclusiones y Sugerencias</a>
+        <a href="#referencias">3. Referencias</a>
+        <a href="#anexos">Anexos</a>
+      </nav>
+
+      <div class="stack" style="display:grid;gap:18px">
+        <!-- Presentación -->
+        <section id="presentacion">
+          <h2>Presentación</h2>
+          <p>
+            Este documento visual resume el informe de la <strong>primera unidad</strong> de la asignatura <em>Diseño de Software</em>.
+            Se aborda el diseño e implementación de una <strong>base de datos de inventario</strong> para una repostería, la construcción de una
+            <strong>aplicación web en ASP.NET</strong> con operaciones CRUD y el uso de <strong>Git/GitHub</strong> para trabajo colaborativo y control de versiones.
+          </p>
+          <div class="credits">
+            <div class="person">Guizado Luque, Yosahandy — <strong>100%</strong></div>
+            <div class="person">Huarancca Ccori, Rodrigo — <strong>100%</strong> (SM)</div>
+            <div class="person">Portilla Alanoca, Efraín Emiliano — <strong>100%</strong></div>
+            <div class="person">Laura Paz, Mariano Jhoshua — <strong>100%</strong></div>
+            <div class="person">Roque Quispe, Adriana — <strong>100%</strong></div>
+          </div>
+        </section>
+
+        <!-- Desarrollo -->
+        <section id="desarrollo">
+          <h2>1. Desarrollo</h2>
+          <div class="kpis">
+            <div class="kpi"><div class="n">3</div><div>Capas: Datos · App · Control</div></div>
+            <div class="kpi"><div class="n">4</div><div>Entidades principales</div></div>
+            <div class="kpi"><div class="n">CRUD</div><div>Crear · Leer · Actualizar · Eliminar</div></div>
+            <div class="kpi"><div class="n">Git</div><div>Colaboración y commits</div></div>
+          </div>
+        </section>
+
+        <!-- 1.1 Base de datos -->
+        <section id="bd">
+          <div class="badge">1.1 Creación de la Base de Datos</div>
+          <div class="timeline">
+            <div class="step">
+              <h3>Modelo Entidad–Relación (conceptual)</h3>
+              <p>Se modelaron entidades como <strong>Productos</strong>, <strong>Proveedores</strong>, <strong>Clientes</strong> y <strong>Movimientos de stock</strong> (Entradas/Salidas), definiendo claves y relaciones para garantizar integridad.</p>
+            </div>
+            <div class="step">
+              <h3>Implementación en SQL Server</h3>
+              <p>Se creó la base de datos y tablas físicas a partir del modelo, contemplando tipos de datos, PK/FK e índices.</p>
+              <pre><code>-- Ejemplo de creación (referencial)
+CREATE DATABASE InventarioReposteria;
+GO
+USE InventarioReposteria;
+GO
+CREATE TABLE Productos (
+  IdProducto INT IDENTITY PRIMARY KEY,
+  Nombre NVARCHAR(100) NOT NULL,
+  Precio DECIMAL(10,2) NOT NULL,
+  Stock INT NOT NULL DEFAULT 0
+);
+-- ... (Proveedores, Clientes, Movimientos, etc.)
+              </code></pre>
+            </div>
+            <div class="step">
+              <h3>Inserción de datos de prueba</h3>
+              <p>Se cargaron registros iniciales para verificar integridad y preparar pruebas de interfaz.</p>
+              <pre><code>INSERT INTO Productos (Nombre, Precio, Stock)
+VALUES (N'Harina 1kg', 5.50, 40), (N'Azúcar 1kg', 4.90, 35);
+              </code></pre>
+            </div>
+          </div>
+
+          <div class="gallery" style="margin-top:10px">
+            <figure class="figure">
+              <div class="figimg">Fig. 1 — Creación de la BD (captura)</div>
+              <figcaption class="figcap">Referencia [1]</figcaption>
+            </figure>
+            <figure class="figure">
+              <div class="figimg">Fig. 2 — Diagrama E–R (captura)</div>
+              <figcaption class="figcap">Referencia [2]</figcaption>
+            </figure>
+            <figure class="figure">
+              <div class="figimg">Fig. 3 — Script de tablas (captura)</div>
+              <figcaption class="figcap">Referencia [3]</figcaption>
+            </figure>
+            <figure class="figure">
+              <div class="figimg">Fig. 4 — Inserciones (captura)</div>
+              <figcaption class="figcap">Referencia [4]</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- 1.2 Interfaz -->
+        <section id="interfaz">
+          <div class="badge">1.2 Creación de la Interfaz</div>
+          <div class="cards">
+            <div class="card">
+              <h3>Diseño de interfaz principal</h3>
+              <p>Estructura de navegación y vistas con ASP.NET (MVC/Razor), priorizando usabilidad para inventario.</p>
+              <div class="small">Fig. 5 (captura)</div>
+            </div>
+            <div class="card">
+              <h3>Operaciones CRUD</h3>
+              <p>Alta, consulta, actualización y eliminación sobre entidades clave; validaciones y notificaciones.</p>
+              <div class="small">Fig. 6 (captura)</div>
+            </div>
+            <div class="card">
+              <h3>Pruebas de funcionamiento</h3>
+              <p>Recorridos de usuario y verificación de flujos críticos: alta de producto, ajuste de stock, consulta por proveedor.</p>
+              <div class="small">Fig. 7 (captura)</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 1.3 Repositorio -->
+        <section id="repo">
+          <div class="badge">1.3 Repositorio</div>
+          <div class="repo">
+            <div class="callout">
+              <strong>Git y GitHub</strong> como base de colaboración: inicialización local, commits atómicos, ramas por feature y publicación.
+            </div>
+            <div class="chips">
+              <span class="chip">Init repo</span>
+              <span class="chip">Colaboradores</span>
+              <span class="chip">Commits</span>
+              <span class="chip">Control de versiones</span>
+              <span class="chip">GitHub Pages</span>
+            </div>
+            <div class="gallery" style="margin-top:10px">
+              <figure class="figure">
+                <div class="figimg">Fig. 8 — Configuración inicial</div>
+                <figcaption class="figcap">GitHub [8]</figcaption>
+              </figure>
+              <figure class="figure">
+                <div class="figimg">Fig. 9 — Colaboradores</div>
+                <figcaption class="figcap">GitHub [8]</figcaption>
+              </figure>
+              <figure class="figure">
+                <div class="figimg">Fig. 10–11 — Commits/usuario</div>
+                <figcaption class="figcap">Pro Git [9]</figcaption>
+              </figure>
+              <figure class="figure">
+                <div class="figimg">Fig. 12 — Repositorio</div>
+                <figcaption class="figcap"><a href="https://github.com/Rodri7930/PRODUCTO-ACADEMICO-1" target="_blank" rel="noopener">Repositorio del proyecto</a> [10]</figcaption>
+              </figure>
+              <figure class="figure">
+                <div class="figimg">Fig. 13 — Infografía</div>
+                <figcaption class="figcap">GitHub Pages [13]</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- Conclusiones -->
+        <section id="conclusiones">
+          <h2>2. Conclusiones y Sugerencias</h2>
+          <div class="cards">
+            <div class="card">
+              <h3>Retos enfrentados</h3>
+              <ul>
+                <li><strong>Modelo de datos</strong>: definición de relaciones (Productos, Proveedores, Entradas/Salidas) y normalización.</li>
+                <li><strong>Integridad</strong>: claves, restricciones y consistencia en operaciones de stock.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Nuevas tecnologías utilizadas</h3>
+              <ul>
+                <li>SQL Server (DDL/DML, SSMS).</li>
+                <li>Git (flujo de commits, ramas, merges).</li>
+                <li>GitHub (colaboración, issues, Pages).</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Sugerencias</h3>
+              <ul>
+                <li>Ampliar pruebas automatizadas y validaciones.</li>
+                <li>Implementar control de inventario con <em>triggers</em> o procedimientos almacenados.</li>
+                <li>CI/CD simple para despliegues de la app.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Referencias -->
+        <section id="referencias">
+          <h2>3. Referencias</h2>
+          <ol>
+            <li>Microsoft, “CREATE DATABASE (Transact-SQL)”, Microsoft Learn, 2024. En línea: <a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/create-database-transact-sql" target="_blank" rel="noopener">learn.microsoft.com/.../create-database</a></li>
+            <li>Microsoft, “SQL Server Management Studio (SSMS) – Diagrams”, Microsoft Learn, 2024. En línea: <a href="https://learn.microsoft.com/en-us/sql/ssms/" target="_blank" rel="noopener">learn.microsoft.com/sql/ssms</a></li>
+            <li>Microsoft, “CREATE TABLE (Transact-SQL)”, Microsoft Learn, 2024. En línea: <a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql" target="_blank" rel="noopener">learn.microsoft.com/.../create-table</a></li>
+            <li>Microsoft, “INSERT (Transact-SQL)”, Microsoft Learn, 2024. En línea: <a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/insert-transact-sql" target="_blank" rel="noopener">learn.microsoft.com/.../insert-transact-sql</a></li>
+            <li>GitHub, plataforma de desarrollo colaborativo. En línea: <a href="https://github.com" target="_blank" rel="noopener">github.com</a></li>
+            <li>S. Chacon & B. Straub, “Pro Git,” 2ª ed., Apress, 2014. En línea: <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">git-scm.com/book</a></li>
+            <li>Repositorio académico del proyecto (GitHub): <a href="https://github.com/Rodri7930/PRODUCTO-ACADEMICO-1" target="_blank" rel="noopener">Rodri7930/PRODUCTO-ACADEMICO-1</a></li>
+          </ol>
+        </section>
+
+        <!-- Anexos -->
+        <section id="anexos">
+          <h2>Anexos</h2>
+          <p class="small">Espacio para incluir capturas adicionales (scripts, interfaz, diagramas) o documentación técnica.</p>
+          <div class="gallery">
+            <figure class="figure"><div class="figimg">Anexo A — Captura</div><figcaption class="figcap">Descripción</figcaption></figure>
+            <figure class="figure"><div class="figimg">Anexo B — Captura</div><figcaption class="figcap">Descripción</figcaption></figure>
+            <figure class="figure"><div class="figimg">Anexo C — Captura</div><figcaption class="figcap">Descripción</figcaption></figure>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">▲</button>
+
+  <footer>
+    “Año del Bicentenario de la recuperación y consolidación de la economía peruana”.<br/>
+    Presentación generada en HTML a partir del contenido del informe original.
+  </footer>
+</body>
+</html>
